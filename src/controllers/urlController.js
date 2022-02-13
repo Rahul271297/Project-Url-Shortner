@@ -73,7 +73,7 @@ let urlShortener = async function(req, res) {
             const uid = new shortId({ length: 5 })
             uid.setDictionary('alpha_lower')
             const urlCode = uid();
-            const shortUrl = `http: //localhost:3000/${urlCode}`
+            const shortUrl = `http://localhost:3000/${urlCode}`
             const urlDetails = { longUrl, shortUrl, urlCode }
             const newUrl = await urlModel.create(urlDetails)
             const responseBody = { longUrl: newUrl.longUrl, shortUrl, urlCode }

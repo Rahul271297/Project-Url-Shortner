@@ -68,10 +68,11 @@ let urlShortener = async function(req, res) {
         if (shortUrlAlready) {
             const { longUrl, shortUrl, urlCode } = shortUrlAlready
             const urlDetails = { longUrl, shortUrl, urlCode }
+            await SET_ASYNC(`${longUrl}`, JSON.stringify(urlDetails))
             return res.status(200).send({ status: true, data: urlDetails })
         } else {
             const uid = new shortId({ length: 5 })
-            uid.setDictionary('alpha_lower')
+            uid.setDictionary('alpha_lower') //lowercase code
             const urlCode = uid();
             const shortUrl = `http://localhost:3000/${urlCode}`
             const urlDetails = { longUrl, shortUrl, urlCode }
